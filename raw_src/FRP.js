@@ -453,8 +453,11 @@ const sigBuildToRecordImpl = (toRecord) => (sbf) => () => {
 ///////////////////////////////////////////
 
 exports.impl = {
+	mkEventJS,
 	mkEvent,
+	pushJS,
 	push,
+	consumeJS,
 	consume,
 	rebuildBy,
 	fmap,
