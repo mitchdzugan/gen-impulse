@@ -32,26 +32,27 @@ exports.s_from = (changed, init) => (function* () {
 exports.s_fmap = (f, s) => (function* () {
 	const sigClass = yield* ask();
 	return impl.s_fmapImpl(f)(s)(sigClass);
-});
+})();
 exports.s_const = (v) => (function* () {
 	const sigClass = yield* ask();
 	return impl.s_constImpl(v)(sigClass);
-});
+})();
 exports.s_zipWith = (f, s1, s2) => (function* () {
 	const sigClass = yield* ask();
-	return impl.s_zipWithImpl(f)(s1)(s2)(sigClass);
-});
+	return impl.s_zipWithImpl(a => b => f(a, b))(s1)(s2)(sigClass);
+})();
 exports.s_flatten = (ss) => (function* () {
 	const sigClass = yield* ask();
 	return impl.s_flattenImpl(ss)(sigClass);
-});
+})();
 exports.s_dedup = (s, eq = (a, b) => a == b) => (function* () {
 	const sigClass = yield* ask();
 	return impl.s_dedupImpl(eq)(s)(sigClass);
-});
+})();
 exports.s_build = (builder) => {
-	const fromSigClass = (sigClass) => (
-		exec(sigClass)(builder).result
-	);
+	const fromSigClass = (sigClass) => {
+		const ires = exec(sigClass)(builder);
+		return ires.result;
+	};
 	return impl.s_buildImpl(fromSigClass)();
 };
