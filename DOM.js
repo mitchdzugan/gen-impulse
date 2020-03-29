@@ -4,7 +4,7 @@ const FRP_raw = require('./raw_src/FRP');
 const snabbdom = require('snabbdom');
 var patch = snabbdom.init([
   require('snabbdom/modules/class').default,
-  require('snabbdom/modules/props').default,
+  require('snabbdom/modules/attributes').default,
   require('snabbdom/modules/style').default,
   require('snabbdom/modules/eventlisteners').default,
 ]);
